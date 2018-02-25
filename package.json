@@ -12,6 +12,7 @@
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
+    "ethereum-blockies-png": "^0.1.2",
     "ethereumjs-abi": "git+https://github.com/gobitfly/ethereumjs-abi.git",
     "ethereumjs-util": "^5.1.1",
     "express": "~4.14.1",
