@@ -13,7 +13,7 @@ var config = function () {
     "0xe9c2d958e6234c862b4afbd75b2fd241e9556303": "Dev Fund",
     "0xa2c7779077edc618c926ab5ba7510877c187cd92": "Community Fund",
     "0x65767ec6d4d3d18a200842352485cdc37cbf3a21": "pool.ellaism.org",
-    "0x395231b5f396fd5b9c6833feea540a3506121ec3": "ella.pool.sexy",
+    "0x395231b5f396fd5b9c6833feea540a3506121ec3": "old-ella.pool.sexy",
     "0xb170c70143b543cd61e7bcadcb9a2f799becda90": "ella.cryptobitpool.eu",
     "0xd4f3670058cde2fc5548293ada3d0a1d34af9ddc": "ella.cryptopools.info",
     "0xe6be7841a6e6b98edd7b38f884a9e32b4170d6b5": "ella.minerpool.net",
@@ -25,7 +25,8 @@ var config = function () {
     "0x00a86233f4d65f4018ca7f8626b96ce72af05a7c": "ella.2miners.com",
     "0xc934884be6338925ed2ef41ce567a14abfcf8763": "Melny3",
     "0x119e4cc05bf44f9cd0b34453b204b7c7089814e2": "ell.baikalmine.com",
-    "0x706e91ff1a586094855cb2408d54657df6b83258": "Megapool.io"
+    "0x706e91ff1a586094855cb2408d54657df6b83258": "Megapool.io",
+    "0xd2871774292e5c7f91fcd5d03b802905e8b414a5": "ella.pool.sexy"
   }
   
 }
