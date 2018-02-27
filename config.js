@@ -12,6 +12,7 @@ var config = function () {
   this.names = {
     "0xe9c2d958e6234c862b4afbd75b2fd241e9556303": "Dev Fund",
     "0xa2c7779077edc618c926ab5ba7510877c187cd92": "Community Fund",
+    "0xe3ecbf9ad12bf63b94fd4f7bc3dc7fcfc56e66ce": "Contributor Fund",
     "0x65767ec6d4d3d18a200842352485cdc37cbf3a21": "pool.ellaism.org",
     "0x395231b5f396fd5b9c6833feea540a3506121ec3": "ella.pool.sexy",
     "0xb170c70143b543cd61e7bcadcb9a2f799becda90": "ella.cryptobitpool.eu",
