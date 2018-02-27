@@ -52,6 +52,14 @@ function getAccount(req, res, next, all) {
         data.isContract = true;
       }
       
+      if (data.isContract) {
+        if (data.lastBlock > 0x3E8) {
+          data.fromBlock = data.lastBlock - 0x3e8;
+        } else {
+          data.fromBlock = 0x00; 
+        } 
+      }
+      
       db.get(req.params.account.toLowerCase(), function(err, value) {
         callback(null, value);
       });
