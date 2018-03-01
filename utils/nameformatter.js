@@ -178,7 +178,9 @@ var resolverABI = [
   }
 ];
 
-function nameFormatter(config) {
+var Web3 = require('web3');
+
+function nameFormatter(config) {  
   this.conf = config;
   
   this.format = function(address) {
@@ -187,6 +189,20 @@ function nameFormatter(config) {
     } else {
       return address;
     }
+  }
+  
+  this.getName = function(address, callback) {
+    var web3 = new Web3();
+    web3.setProvider(this.conf.provider);
+    
+    var reverseContract = new web3.eth.Contract(reverseABI, "0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
+    var resolverContract = new web3.eth.Contract(resolverABI, "0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
+    
+    reverseContract.methods.node(address).call().then(function(namehash) {
+      resolverContract.methods.name(namehash).call().then(function(domain) {
+        callback(domain);
+      });
+    });
   }
 }
 module.exports = nameFormatter;
