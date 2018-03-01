@@ -9,10 +9,10 @@ block content
     tr
       td Balance:
       td #{ethformatter(account.balance)}
-    if account.name
+    if nameformatter.format(account.address) !== account.address
       tr
         td Name:
-        td #{account.name}
+        td #{nameformatter.format(account.address)}
 
   div
     ul.nav.nav-tabs(role='tablist')
