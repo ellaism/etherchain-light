@@ -184,7 +184,7 @@ function nameFormatter(config) {
   this.conf = config;
   
   this.web3 = new Web3();
-  this.web3.setProvider(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+  this.web3.setProvider(new Web3.providers.HttpProvider("https://jsonrpc.ellaism.org"));
 
   this.reverseContract = this.web3.eth.contract(reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
   this.resolverContract = this.web3.eth.contract(resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
