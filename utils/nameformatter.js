@@ -217,8 +217,11 @@ function nameFormatter(config) {
       }
     }
     
+    var cwd = process.cwd();
+    process.chdir("/tmp");
     var namehash = this.reverseContract.node.call(address);
     var domain = this.resolverContract.name.call(namehash);
+    process.chdir(cwd);
     
     this.resolved[address] = true;
     this.names[address] = domain;
