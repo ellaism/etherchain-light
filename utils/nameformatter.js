@@ -189,9 +189,39 @@ function nameFormatter(config) {
   this.reverseContract = this.web3.eth.contract(reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
   this.resolverContract = this.web3.eth.contract(resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
   
+  this.resolved = {};
+  this.names = {};
+  
+  this.clear = function() {
+    this.resolved = {};
+    this.names = {};
+  }
+  
+  this.startClear = function() {
+    var self = this;
+    
+    setTimeout(function() {
+      self.clear();
+      self.startClear();
+    }, 3600 * 1000);
+  }
+  
+  this.startClear();
+  
   this.format = function(address) {
+    if (this.resolved[address]) {
+      if (this.names[address]) {
+        return this.names[address];
+      } else {
+        return address;
+      }
+    }
+    
     var namehash = this.reverseContract.node.call(address);
     var domain = this.resolverContract.name.call(namehash);
+    
+    this.resolved[address] = true;
+    this.names[address] = domain;
 
     if (domain) {
       return domain;
