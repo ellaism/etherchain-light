@@ -183,26 +183,21 @@ var Web3 = require('web3');
 function nameFormatter(config) {  
   this.conf = config;
   
+  this.web3 = new Web3();
+  this.web3.setProvider(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+
+  this.reverseContract = this.web3.eth.contract(reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
+  this.resolverContract = this.web3.eth.contract(resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
+  
   this.format = function(address) {
-    if (this.conf.names[address]) {
-      return this.conf.names[address];
+    var namehash = this.reverseContract.node.call(address);
+    var domain = this.resolverContract.name.call(namehash);
+
+    if (domain) {
+      return domain;
     } else {
       return address;
     }
-  }
-  
-  this.getName = function(address, callback) {
-    var web3 = new Web3();
-    web3.setProvider(this.conf.provider);
-    
-    var reverseContract = new web3.eth.Contract(reverseABI, "0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
-    var resolverContract = new web3.eth.Contract(resolverABI, "0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
-    
-    reverseContract.methods.node(address).call().then(function(namehash) {
-      resolverContract.methods.name(namehash).call().then(function(domain) {
-        callback(domain);
-      });
-    });
   }
 }
 module.exports = nameFormatter;
