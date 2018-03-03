@@ -1,391 +1,6 @@
-var reverseABI = [
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "name": "resolver",
-        "type": "address"
-      }
-    ],
-    "name": "claimWithResolver",
-    "outputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "claim",
-    "outputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "ens",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "defaultResolver",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "node",
-    "outputs": [
-      {
-        "name": "ret",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "name",
-        "type": "string"
-      }
-    ],
-    "name": "setName",
-    "outputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "name": "ensAddr",
-        "type": "address"
-      },
-      {
-        "name": "resolverAddr",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "constructor"
-  }
-];
-
-var resolverABI = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "ens",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "name": "name",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "name": "_name",
-        "type": "string"
-      }
-    ],
-    "name": "setName",
-    "outputs": [],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "name": "ensAddr",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "constructor"
-  }
-];
-
-var ensABI = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "name": "resolver",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "name": "owner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "name": "label",
-        "type": "bytes32"
-      },
-      {
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "setSubnodeOwner",
-    "outputs": [],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "name": "ttl",
-        "type": "uint64"
-      }
-    ],
-    "name": "setTTL",
-    "outputs": [],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ttl",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint64"
-      }
-    ],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "name": "resolver",
-        "type": "address"
-      }
-    ],
-    "name": "setResolver",
-    "outputs": [],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "setOwner",
-    "outputs": [],
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "indexed": true,
-        "name": "label",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "NewOwner",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "Transfer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "resolver",
-        "type": "address"
-      }
-    ],
-    "name": "NewResolver",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "node",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "ttl",
-        "type": "uint64"
-      }
-    ],
-    "name": "NewTTL",
-    "type": "event"
-  }
-];
-
 var Web3 = require('web3');
+var namehash = require('eth-ens-namehash');
+var abi = require('./abi');
 
 function nameFormatter(config) {  
   this.conf = config;
@@ -393,9 +8,10 @@ function nameFormatter(config) {
   this.web3 = new Web3();
   this.web3.setProvider(config.provider);
 
-  this.reverseContract = this.web3.eth.contract(reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
-  this.resolverContract = this.web3.eth.contract(resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
-  this.ensContract = this.web3.eth.contract(ensABI).at("0x518232dd973C321107D28Cb11483b857b9A1E158");
+  this.reverseContract = this.web3.eth.contract(abi.reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
+  this.resolverContract = this.web3.eth.contract(abi.resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
+  this.ensContract = this.web3.eth.contract(abi.ensABI).at("0x518232dd973C321107D28Cb11483b857b9A1E158");
+  this.publicContract = this.web3.eth.contract(abi.publicABI).at("0xFd570C3E2BEd90637375071634A12625406EC3c8");
   
   this.resolved = {};
   this.names = {};
@@ -447,17 +63,28 @@ function nameFormatter(config) {
     this.resolved[address] = true;
 
     var self = this;
-    self.reverseContract.node.call(address, function(err, namehash) {
+    self.reverseContract.node.call(address, function(err, addrNamehash) {
       if (err) {
         console.log(err);
         return;
       }
-      self.resolverContract.name.call(namehash, function(err, domain) {
+      self.resolverContract.name.call(addrNamehash, function(err, domain) {
         if (err) {
           console.log(err);
           return;
         }
-        self.names[address] = domain;
+        if (domain) {
+          var domainNamehash = namehash.hash(domain);
+          self.publicContract.addr.call(domainNamehash, function(err, resolvedAddress) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            if (resolvedAddress == address) {
+              self.names[address] = domain;
+            }
+          });
+        }
       });
     });
   }
