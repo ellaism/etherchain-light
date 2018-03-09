@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     
     var accounts = JSON.parse(data);
     accounts = accounts.map(function(account) {
-      account.balance = new web3.utils.BN(account.balance);
+      account.balance = web3.utils.toBigNumber(account.balance);
       return account;
     });
     
