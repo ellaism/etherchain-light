@@ -38,6 +38,10 @@ router.get('/', function(req, res, next) {
     if (err) {
       return next(err);
     }
+    
+    for (var i = 0; i < accounts.length; i++) {
+      accounts[i].rank = i+1; 
+    }
       
     res.render("accounts", { accounts: accounts });
   });
