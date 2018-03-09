@@ -10,17 +10,35 @@ router.get('/', function(req, res, next) {
   var web3 = new Web3();
   web3.setProvider(config.provider);
   
-  fs.readFile(process.env["TOP"], 'utf8', function(err, data) {
-    if (err) {
-      return next({name:"NoAccountsFound", message: "Chain contains no accounts."});
+  async.waterfall([
+    function(callback) {
+      fs.readFile(process.env["TOP"], 'utf8', function(err, data) {
+        if (err) {
+          return callback({name:"NoAccountsFound", message: "Chain contains no accounts."});
+        }
+    
+        var accounts = JSON.parse(data);
+        callback(null, accounts);
+      });
+    }, function(accounts, callback) {
+      async.mapSeries(accounts, function(account, eachCallback) {
+        web3.eth.getBalance(account.address, function(err, balance) {
+          if (err) {
+            return eachCallback(err);
+          }
+          
+          account.balance = balance;
+          eachCallback(account);
+        });
+      }, function(err, accounts) {
+        callback(err, accounts); 
+      });
     }
-    
-    var accounts = JSON.parse(data);
-    accounts = accounts.map(function(account) {
-      account.balance = web3._extend.utils.toBigNumber(account.balance);
-      return account;
-    });
-    
+  ], function(err, accounts) {
+    if (err) {
+      return next(err);
+    }
+      
     res.render("accounts", { accounts: accounts });
   });
 });
