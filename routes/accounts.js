@@ -3,58 +3,25 @@ var router = express.Router();
 
 var async = require('async');
 var Web3 = require('web3');
+var fs = require('fs');
 
-router.get('/:offset?', function(req, res, next) {
+router.get('/', function(req, res, next) {
   var config = req.app.get('config');  
   var web3 = new Web3();
   web3.setProvider(config.provider);
   
-  async.waterfall([
-    function(callback) {
-      web3.parity.listAccounts(20, req.params.offset, function(err, result) {
-        callback(err, result);
-      });
-    }, function(accounts, callback) {
-      
-      var data = {};
-      
-      if (!accounts) {
-        return callback({name:"FatDBDisabled", message: "Parity FatDB system is not enabled. Please restart Parity with the --fat-db=on parameter."});
-      }
-      
-      if (accounts.length === 0) {
-        return callback({name:"NoAccountsFound", message: "Chain contains no accounts."});
-      }
-      
-      var lastAccount = accounts[accounts.length - 1];
-      
-      async.eachSeries(accounts, function(account, eachCallback) {
-        web3.eth.getCode(account, function(err, code) {
-          if (err) {
-            return eachCallback(err);
-          }
-          data[account] = {};
-          data[account].address = account;
-          data[account].type = code.length > 2 ? "Contract" : "Account";
-          
-          web3.eth.getBalance(account, function(err, balance) {
-            if (err) {
-              return eachCallback(err);
-            }
-            data[account].balance = balance;
-            eachCallback();
-          });
-        });
-      }, function(err) {
-        callback(err, data, lastAccount);
-      });
-    }
-  ], function(err, accounts, lastAccount) {
+  fs.readFile(process.env["TOP"], 'utf8', function(err, data) {
     if (err) {
-      return next(err);
+      return next({name:"NoAccountsFound", message: "Chain contains no accounts."});
     }
     
-    res.render("accounts", { accounts: accounts, lastAccount: lastAccount });
+    var accounts = JSON.parse(data);
+    accounts = accounts.map(function(account) {
+      account.balance = new web3.utils.BN(account.balance);
+      return account;
+    });
+    
+    res.render("accounts", { accounts: accounts });
   });
 });
 
