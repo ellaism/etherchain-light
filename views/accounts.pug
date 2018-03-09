@@ -6,12 +6,14 @@ block content
   table.table
     thead
       tr
+        th Rank
         th Address
         th Type
         th Balance
     tbody
       for account in accounts
         tr
+          td #{account.rank}
           td 
             a(href="/account/" + account.address) #{nameformatter.format(account.address)}
           td #{account.type}
