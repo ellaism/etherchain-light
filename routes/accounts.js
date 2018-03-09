@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
           }
           
           account.balance = balance;
-          eachCallback(account);
+          eachCallback(err, account);
         });
       }, function(err, accounts) {
         callback(err, accounts); 
