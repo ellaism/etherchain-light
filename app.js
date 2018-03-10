@@ -13,6 +13,7 @@ var accounts = require('./routes/accounts');
 var contract = require('./routes/contract');
 var signature = require('./routes/signature');
 var search = require('./routes/search');
+var api = require('./routes/api');
 
 var config = new(require('./config.js'))();
 
@@ -27,6 +28,7 @@ app.set('view engine', 'pug');
 app.set('config', config);
 app.set('db', db);
 app.set('trust proxy', true);
+app.set('env', 'production');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -43,6 +45,7 @@ app.locals.numeral = require('numeral');
 app.locals.ethformatter = require('./utils/ethformatter.js');
 app.locals.nameformatter = new(require('./utils/nameformatter.js'))(config);
 app.locals.nodeStatus = new(require('./utils/nodeStatus.js'))(config);
+app.locals.blockies = require('ethereum-blockies-png');
 app.locals.config = config;
 
 app.use('/', index);
@@ -53,6 +56,7 @@ app.use('/accounts', accounts);
 app.use('/contract', contract);
 app.use('/signature', signature);
 app.use('/search', search);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
