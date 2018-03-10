@@ -39,6 +39,10 @@ router.get('/', function(req, res, next) {
       return next(err);
     }
     
+    accounts.sort(function(a, b) {
+      return b.balance.cmp(a.balance);
+    });
+    
     for (var i = 0; i < accounts.length; i++) {
       accounts[i].rank = i+1; 
     }
