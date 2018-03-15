@@ -8,6 +8,7 @@ block content
       tr
         th Address
         th Weekly Blocks
+        th Daily Blocks
         th Real-time Miners
         th Real-time Hashrate
     tbody
@@ -15,6 +16,7 @@ block content
         tr
           td
             a(href="/account/" + miner.address) #{nameformatter.format(miner.address)}
-          td #{miner.minedWeek}
+          td #{formatBlocks(miner.minedWeek, 43200)}
+          td #{formatBlocks(miner.minedDay, 6171)}
           td #{formatMinersTotal(miner)}
           td #{formatMinersHashrate(miner)}
