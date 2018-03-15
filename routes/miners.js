@@ -22,6 +22,10 @@ function formatMinersHashrate(miner) {
   }
 }
 
+function formatBlocks(n, total) {
+  return n + " (" + (n / total * 100).toFixed(2) + "%)";
+}
+
 router.get('/', function(req, res, next) {
   var config = req.app.get('config');
   var web3 = new Web3();
@@ -47,7 +51,8 @@ router.get('/', function(req, res, next) {
 
     res.render("miners", { miners: miners,
                            formatMinersTotal: formatMinersTotal,
-                           formatMinersHashrate: formatMinersHashrate });
+                           formatMinersHashrate: formatMinersHashrate,
+                           formatBlocks: formatBlocks });
   });
 });
 
