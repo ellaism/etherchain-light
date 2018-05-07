@@ -22,7 +22,7 @@ function getAccount(req, res, next, all) {
       });
     }, function(lastBlock, callback) {
       data.lastBlock = lastBlock.number;
-      //limits the from block to -1000 blocks ago if block count is greater than 1000
+      // limits the from block to -6171 blocks ago if block count is greater than 6171
       if (data.lastBlock > BLOCKS_BACK) {
         data.fromBlock = data.lastBlock - BLOCKS_BACK;
       } else {
