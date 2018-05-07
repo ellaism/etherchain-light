@@ -30,15 +30,10 @@ block content
       #transactions.tab-pane.active(role='tabpanel')
         if isAll
           h3 All Transactions
-          if account.nonce > 100
-            p There are more than 100 transactions in this account. The transaction history has been pruned.
-          else if account.isContract
-            p This account is a contract. The transaction history has been pruned.
+          p We can only show recent transactions due to increased number of attacks.
         else
           h3 Recent Transactions
-            if account.nonce <= 100 && !account.isContract
-              small &nbsp;&nbsp;
-                a(href="/account/" + account.address + "/all") Show All Transactions
+          p Transactions related to this account on the last day.
         table.table
           thead
             tr
