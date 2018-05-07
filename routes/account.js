@@ -11,6 +11,10 @@ function getAccount(req, res, next, all) {
   var web3 = new Web3();
   web3.setProvider(config.provider);
   
+  if (!web3._extend.utils.isAddress(req.params.account)) {
+    return next({ message: "Invalid address" });
+  }
+  
   var db = req.app.get('db');
   
   var data = {};
