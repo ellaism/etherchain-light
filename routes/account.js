@@ -5,6 +5,8 @@ var async = require('async');
 var Web3 = require('web3');
 
 function getAccount(req, res, next, all) {
+  var BLOCKS_BACK = 6171;
+  
   var config = req.app.get('config');  
   var web3 = new Web3();
   web3.setProvider(config.provider);
@@ -21,8 +23,8 @@ function getAccount(req, res, next, all) {
     }, function(lastBlock, callback) {
       data.lastBlock = lastBlock.number;
       //limits the from block to -1000 blocks ago if block count is greater than 1000
-      if (data.lastBlock > 0x3E8 && !all) {
-        data.fromBlock = data.lastBlock - 0x3e8;
+      if (data.lastBlock > BLOCKS_BACK) {
+        data.fromBlock = data.lastBlock - BLOCKS_BACK;
       } else {
         data.fromBlock = 0x00;
       }
@@ -36,13 +38,6 @@ function getAccount(req, res, next, all) {
       });
     }, function(nonce, callback) {
       data.nonce = nonce;
-      if (nonce > 100) {
-        if (data.lastBlock > 0x3E8) {
-          data.fromBlock = data.lastBlock - 0x3e8;
-        } else {
-          data.fromBlock = 0x00; 
-        }
-      }
       web3.eth.getCode(req.params.account, function(err, code) {
         callback(err, code);
       });
@@ -50,14 +45,6 @@ function getAccount(req, res, next, all) {
       data.code = code;
       if (code !== "0x") {
         data.isContract = true;
-      }
-      
-      if (data.isContract) {
-        if (data.lastBlock > 0x3E8) {
-          data.fromBlock = data.lastBlock - 0x3e8;
-        } else {
-          data.fromBlock = 0x00; 
-        } 
       }
       
       db.get(req.params.account.toLowerCase(), function(err, value) {
