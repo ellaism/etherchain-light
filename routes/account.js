@@ -164,7 +164,7 @@ router.get('/:account', function(req, res, next) {
 });
 
 router.get('/:account/all', function(req, res, next) {
-  getAccount(req, res, next, true);
+  getAccount(req, res, next, false);
 });
 
 module.exports = router;
