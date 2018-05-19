@@ -7,11 +7,17 @@ html(lang="en")
     // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
 
     meta(name='description', content='The explorer for the Ellaism blockchain')
+    meta(name='author', content='ellaism')
+    meta(name='keywords', content='ethereum, explorer, blockchain, Ellaism , Ella,  etherchain, cryptocurrency, cryptocurrencies, bitcoin')
 
-    title Ellaism Explorer
+    title Ellaism Block Explorer
 
     link(rel='stylesheet', href='/stylesheets/theme.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/analytics.js')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="https://files.coinmarketcap.com/static/widget/currency.js")
+    script(src='/js/price.js')
 
     link(rel="icon", type="image/png", href="https://www.gravatar.com/avatar/98abb59df18a837592a8079e31fd9c47?s=16", sizes="16x16")
     link(rel="icon", type="image/png", href="https://www.gravatar.com/avatar/98abb59df18a837592a8079e31fd9c47?s=32", sizes="32x32")
@@ -62,6 +68,34 @@ html(lang="en")
                   a(href='/contract/verify') Verify Contract
                 li
                   a(href='/signature/verify') Verify Signature
+                li
+                  a(href='https://ellaism.github.io/ellawallet/') Web Wallet
+                li
+                  a(href='https://stats.ellaism.org/') Network Stats
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Pools
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='https://pool.ellaism.org/') Dev Pool
+                li
+                  a(href='https://pool.ellaism.io/') Ellaism.io
+                li
+                  a(href='http://ella.minerpool.net/') MinerPool
+                li
+                  a(href='http://ella.cryptobitpool.eu/') Cryptobitpool
+                li
+                  a(href='http://ella.pool.sexy/#/') Pool Sexy
+                li
+                  a(href='http://ella.cryptopools.info/') Cryptopools
+                li
+                  a(href='https://ella.epool.io/') Epool.io
+                li
+                  a(href='http://ellaismpool.com/') Ellaismpool
+                li
+                  a(href='https://minerpool.net/pools/ellaism/') Full list
+                 
 
           form.navbar-form.navbar-right(action="/search", method="POST")
             .form-group
@@ -82,5 +116,5 @@ html(lang="en")
       hr
       footer
         p
-          a(href="https://github.com/ellaism/etherchain-light") Etherchain Light
+          a(href="https://github.com/ellaism/etherchain-light") Ellaism Block Explorer.
           |  | #{nodeStatus.version} | #{nodeStatus.nbrPeers} Peers connected
