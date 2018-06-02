@@ -24,5 +24,12 @@ pre {
 }
 
 .navbar-notice {
-    background-color: #023008;
+    background-color: #023008 !important;
+}
+
+@media (max-width: 767px) {
+    .navbar-notice > p {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
