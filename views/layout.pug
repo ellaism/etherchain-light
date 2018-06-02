@@ -62,6 +62,13 @@ html(lang="en")
                   a(href='/contract/verify') Verify Contract
                 li
                   a(href='/signature/verify') Verify Signature
+            li.dropdown.navbar-inverse
+              a.dropdown-toggle(href="#", data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Network Upgrade Notice
+                span.caret
+              ul.dropdown-menu.navbar-notice
+                p.navbar-text
+                  | The network upgrade enabling Byzantium and WebAssembly will take place at block 2 000 000. Support for multi-geth and go-ellaism will be deprecated. Please upgrade to Parity v.1.10.3+.
 
           form.navbar-form.navbar-right(action="/search", method="POST")
             .form-group
