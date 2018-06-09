@@ -30,9 +30,14 @@ block content
       #transactions.tab-pane.active(role='tabpanel')
         if isAll
           h3 All Transactions
-          p We can only show recent transactions due to increased number of attacks.
+          if account.allowAll
+            p transactions related to this account at all time.
+          else
+            p We can only show recent transactions due to increased number of attacks.
         else
           h3 Recent Transactions
+            small &nbsp;&nbsp;
+              a(href="/account/" + account.address + "/all") Show All Transactions
           p Transactions related to this account in the last 24 hours.
         table.table
           thead
@@ -56,12 +61,12 @@ block content
                     td Mining Reward
                     td
                     td New Coins
-                    td 
+                    td
                       a(href="/account/" + trace.action.author) #{nameformatter.format(trace.action.author)}
                     td #{ethformatter(trace.action.value)}
                 else if trace.type !== "reward"
-                  tr            
-                    td 
+                  tr
+                    td
                       a(href="/tx/" + trace.transactionHash)  #{trace.transactionHash.substr(0, 10)}...
                     td
                       a(href="/block/" + trace.blockNumber) #{trace.blockNumber}
@@ -77,7 +82,7 @@ block content
                           span.glyphicon.glyphicon-import(style="color: green;")
                       td
                         a(href="/account/" + trace.action.from) #{nameformatter.format(trace.action.from)}
-                      td 
+                      td
                         a(href="/account/" + trace.action.to) #{nameformatter.format(trace.action.to)}
                       td #{ethformatter(trace.action.value)}
                     else if trace.type === "create"
@@ -102,7 +107,7 @@ block content
                       td
                         a(href="/account/" + trace.action.refundAddress) #{nameformatter.format(trace.action.refundAddress)}
                       td #{ethformatter(trace.action.balance)}
-      
+
       if account.isContract
         #code.tab-pane(role='tabpanel')
           h3 Code
