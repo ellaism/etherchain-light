@@ -16,21 +16,7 @@ function getAccount(req, res, next, all) {
     return next({ message: "Invalid address" });
   }
 
-  if (all) {
-    var devFundContract = web3.eth.contract(abi.multisigABI).at("0xe9C2d958E6234c862b4AfBD75b2fd241E9556303");
-    var comFundContract = web3.eth.contract(abi.multisigABI).at("0x01ff0FFd25B64dE2217744fd7d4dc4aA3cAbceE7");
-    var donateTokenContract = web3.eth.contract(abi.donateTokenABI).at("0x4aaad871293c4581edb580e99fb6613b0a3bc488");
-
-
-
-    this.reverseContract = this.web3.eth.contract(abi.reverseABI).at("0x268e3C120a46d9fF7e27D05eDC570fE82d8c318D");
-    this.resolverContract = this.web3.eth.contract(abi.resolverABI).at("0x632dc20Bd49e96CD9ad525e4FfC70Be6368119f1");
-    this.ensContract = this.web3.eth.contract(abi.ensABI).at("0x518232dd973C321107D28Cb11483b857b9A1E158");
-    this.publicContract = this.web3.eth.contract(abi.publicABI).at("0xFd570C3E2BEd90637375071634A12625406EC3c8");
-  }
-
   var db = req.app.get('db');
-
   var data = {};
 
   async.waterfall([
