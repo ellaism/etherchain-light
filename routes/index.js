@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     }, function(lastBlock, callback) {
       var blocks = [];
       
-      var blockCount = 10;
+      var blockCount = 5;
       
       if (lastBlock.number - blockCount < 0) {
         blockCount = lastBlock.number + 1;
@@ -41,13 +41,15 @@ router.get('/', function(req, res, next) {
     var txs = [];
     blocks.forEach(function(block) {
       block.transactions.forEach(function(tx) {
-        if (txs.length === 10) {
+        if (txs.length === 5) {
           return;
         }
         txs.push(tx);
       });
     });
-    res.render('index', { blocks: blocks, txs: txs });
+    var diff = blocks[0].difficulty;
+    //console.log(diff);
+    res.render('index', { blocks: blocks, txs: txs, diff: diff });
   });
   
 });
